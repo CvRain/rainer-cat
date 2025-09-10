@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4p7g3ndt6xtj"]
+
+[ext_resource type="Script" uid="uid://dl7o8n5ji43tf" path="res://scripts/Main.cs" id="1_8edsk"]
+[ext_resource type="PackedScene" uid="uid://pb0dpil12dql" path="res://scences/actor.tscn" id="1_i2nf4"]
+[ext_resource type="PackedScene" uid="uid://cx3yd0oxx2yji" path="res://scences/keyboard.tscn" id="3_8edsk"]
+[ext_resource type="PackedScene" uid="uid://cvxt1j12msyb" path="res://scences/message.tscn" id="4_3if0j"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_8edsk")
+
+[node name="Actor" parent="." instance=ExtResource("1_i2nf4")]
+position = Vector2(256, 128)
+
+[node name="Keyboard" parent="." instance=ExtResource("3_8edsk")]
+offset_left = 256.0
+offset_top = 192.0
+offset_right = 256.0
+offset_bottom = 192.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Message" parent="." instance=ExtResource("4_3if0j")]
+offset_left = 152.0
+offset_top = 91.0
+offset_right = 152.0
+offset_bottom = 91.0
+
+[node name="ResetTimer" type="Timer" parent="."]
+
+[node name="GlobalInput" type="GlobalInput" parent="."]
