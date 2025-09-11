@@ -5,9 +5,10 @@ namespace RainerCat.scripts;
 public partial class Main : Node2D
 {
     private Node _actorNode;
+    private Node2D _userCat;
 
     private Vector2I _clickStartPos = Vector2I.Zero;
-    private Vector2I _windowStartPos = Vector2I.Zero;
+    private Vector2 _userCatStartPos = Vector2.Zero;
     private bool _isDragging;
     private bool _isFrame1Selected;
     private Timer _resetTimer;
@@ -24,6 +25,14 @@ public partial class Main : Node2D
         GetTree().Root.SetTransparentBackground(true);
 
         BindNodes();
+        
+        var screenSize = DisplayServer.ScreenGetSize();
+        GetTree().GetRoot().SetSize(screenSize);
+
+        // var window = GetWindow();
+        // window.MousePassthrough = true;
+        // window.MousePassthroughPolygon = [new Vector2(1920, 1080)];
+
     }
 
     private void ResetTimerOnTimeout()
@@ -39,7 +48,7 @@ public partial class Main : Node2D
             if (mouseButton.Pressed)
             {
                 _clickStartPos = DisplayServer.MouseGetPosition();
-                _windowStartPos = GetWindow().Position;
+                _userCatStartPos = _userCat.Position;
                 _isDragging = true;
                 
                 ChangeAnimateFrame(_isFrame1Selected ? 1 : 2);
@@ -74,17 +83,18 @@ public partial class Main : Node2D
         {
             var mousePos = DisplayServer.MouseGetPosition();
             var distance = mousePos - _clickStartPos;
-            GetWindow().SetPosition(_windowStartPos + distance);
+            _userCat.Position = _userCatStartPos + distance;
         }
     }
 
     private void BindNodes()
     {
-        _actorNode = GetNode<Node>("Actor");
+        _userCat = GetNode<Node2D>("UserCat");
+        _actorNode = GetNode<Node>("UserCat/Actor");
         _resetTimer = GetNode<Timer>("ResetTimer");
-        _myCat = GetNode<AnimatedSprite2D>("Actor/AnimatedSprite2D");
+        _myCat = GetNode<AnimatedSprite2D>("UserCat/Actor/AnimatedSprite2D");
         _globalInput = GetNode<Node>("GlobalInput");
-        var actorArea2D = GetNode<Area2D>("Actor/Area2D");
+        var actorArea2D = GetNode<Area2D>("UserCat/Actor/Area2D");
         
         actorArea2D.InputEvent += OnInputEvent;
 

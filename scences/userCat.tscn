@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://chr6vk2uvusso"]
+
+[ext_resource type="PackedScene" uid="uid://pb0dpil12dql" path="res://scences/actor.tscn" id="1_ps643"]
+[ext_resource type="PackedScene" uid="uid://cx3yd0oxx2yji" path="res://scences/keyboard.tscn" id="2_4if7w"]
+[ext_resource type="PackedScene" uid="uid://cvxt1j12msyb" path="res://scences/message.tscn" id="3_sf1y3"]
+
+[node name="UserCat" type="Node2D"]
+
+[node name="Actor" parent="." instance=ExtResource("1_ps643")]
+
+[node name="Control" parent="." instance=ExtResource("2_4if7w")]
+offset_left = 8.0
+offset_top = 64.0
+offset_right = 8.0
+offset_bottom = 64.0
+
+[node name="Message" parent="." instance=ExtResource("3_sf1y3")]
+offset_left = -112.0
+offset_top = -40.0
+offset_right = -112.0
+offset_bottom = -40.0
